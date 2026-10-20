@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Assess diabetes risk using patient health metrics and our trained machine learning classification model.">
+  <title>Diabetes Prediction — MediPredict</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Deferred Scripts -->
+  <script src="js/main.js" defer></script>
+  <script src="js/predict.js" defer></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container flex-between">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚕️</span>
+        <span>MediPredict</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="predict.html" class="active" aria-current="page">Predict</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Page Header -->
+    <header class="section page-header">
+      <div class="container">
+        <span class="badge">Prediction Tool</span>
+        <h1>Diabetes Risk Assessment</h1>
+        <p>Enter patient health metrics below. All fields are required for accurate prediction.</p>
+      </div>
+    </header>
+
+    <!-- Main Content Area: Form & Info Sidebar -->
+    <section class="section predict-section">
+      <div class="container">
+        <div class="grid-2 predict-grid" style="grid-template-columns: 1.85fr 1fr; align-items: start;">
+          <!-- Left Column: Prediction Form -->
+          <div class="card form-card">
+            <form id="prediction-form" novalidate>
+              <div class="form-grid">
+                <!-- Field 1: Pregnancies -->
+                <div class="form-group">
+                  <label class="form-label" for="pregnancies">Pregnancies <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="pregnancies" name="pregnancies" placeholder="e.g. 2" step="1" min="0" max="20" required>
+                  </div>
+                  <span class="form-hint">Number of pregnancies (0-20)</span>
+                  <span class="form-error" id="pregnancies-error"></span>
+                </div>
+
+                <!-- Field 2: Glucose Level -->
+                <div class="form-group">
+                  <label class="form-label" for="glucose">Glucose Level <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="glucose" name="glucose" placeholder="e.g. 120" step="0.1" min="0" max="300" required>
+                    <span class="input-unit">mg/dL</span>
+                  </div>
+                  <span class="form-hint">Plasma glucose concentration (70-140 mg/dL normal)</span>
+                  <span class="form-error" id="glucose-error"></span>
+                </div>
+
+                <!-- Field 3: Blood Pressure -->
+                <div class="form-group">
+                  <label class="form-label" for="bloodPressure">Blood Pressure <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="bloodPressure" name="bloodPressure" placeholder="e.g. 80" step="0.1" min="0" max="200" required>
+                    <span class="input-unit">mmHg</span>
+                  </div>
+                  <span class="form-hint">Diastolic blood pressure (60-90 mmHg normal)</span>
+                  <span class="form-error" id="bloodPressure-error"></span>
+                </div>
+
+                <!-- Field 4: Skin Thickness -->
+                <div class="form-group">
+                  <label class="form-label" for="skinThickness">Skin Thickness <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="skinThickness" name="skinThickness" placeholder="e.g. 20" step="0.1" min="0" max="100" required>
+                    <span class="input-unit">mm</span>
+                  </div>
+                  <span class="form-hint">Triceps skin fold thickness (10-40 mm typical)</span>
+                  <span class="form-error" id="skinThickness-error"></span>
+                </div>
+
+                <!-- Field 5: Insulin Level -->
+                <div class="form-group">
+                  <label class="form-label" for="insulin">Insulin Level <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="insulin" name="insulin" placeholder="e.g. 80" step="0.1" min="0" max="900" required>
+                    <span class="input-unit">µU/mL</span>
+                  </div>
+                  <span class="form-hint">2-hour serum insulin (16-166 µU/mL normal)</span>
+                  <span class="form-error" id="insulin-error"></span>
+                </div>
+
+                <!-- Field 6: BMI -->
+                <div class="form-group">
+                  <label class="form-label" for="bmi">BMI (Body Mass Index) <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="bmi" name="bmi" placeholder="e.g. 25.5" step="0.1" min="0" max="70" required>
+                    <span class="input-unit">kg/m²</span>
+                  </div>
+                  <span class="form-hint">Body mass index (18.5-24.9 normal)</span>
+                  <span class="form-error" id="bmi-error"></span>
+                </div>
+
+                <!-- Field 7: Diabetes Pedigree Function -->
+                <div class="form-group">
+                  <label class="form-label" for="dpf">Diabetes Pedigree Function <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="dpf" name="dpf" placeholder="e.g. 0.5" step="0.001" min="0" max="2.5" required>
+                  </div>
+                  <span class="form-hint">Genetic diabetes risk score (0.0-2.5)</span>
+                  <span class="form-error" id="dpf-error"></span>
+                </div>
+
+                <!-- Field 8: Age -->
+                <div class="form-group">
+                  <label class="form-label" for="age">Age <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" id="age" name="age" placeholder="e.g. 35" step="1" min="1" max="120" required>
+                    <span class="input-unit">years</span>
+                  </div>
+                  <span class="form-hint">Patient age in years</span>
+                  <span class="form-error" id="age-error"></span>
+                </div>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="form-actions" style="display:flex;gap:12px;margin-top:24px;">
+                <button type="submit" class="btn btn-primary btn-lg" id="predict-btn">
+                  <span class="btn-icon">🔬</span> Predict Risk
+                </button>
+                <button type="button" class="btn btn-secondary" id="clear-btn">
+                  <span class="btn-icon">🔄</span> Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Column: Sidebar -->
+          <aside class="card sidebar-card" aria-label="Tool Information">
+            <h3>ℹ️ About This Tool</h3>
+            <p>This prediction tool uses a K-Nearest Neighbors (KNN) algorithm trained on the Pima Indians Diabetes Database.</p>
+            
+            <h4>Model Performance</h4>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Accuracy</td>
+                    <td><strong>75.32%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Recall</td>
+                    <td><strong>61.11%</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>How It Works</h4>
+            <ol class="steps-list">
+              <li>Enter patient metrics</li>
+              <li>Data is preprocessed (imputed + scaled)</li>
+              <li>KNN algorithm compares with training data</li>
+              <li>Risk assessment is generated</li>
+            </ol>
+
+            <div class="disclaimer">
+              <p>⚠️ <strong>Demo Note:</strong> This is a demo. Connect the Flask/FastAPI backend for real ML predictions.</p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Result Section (initially hidden) -->
+        <div class="result-section" id="result-section">
+          <div class="result-icon" id="result-icon"></div>
+          <h2 class="result-title" id="result-title"></h2>
+          <p class="result-text" id="result-text"></p>
+          <p class="result-disclaimer">
+            <em>⚠️ This demo uses a simplified heuristic for illustration only. For actual ML predictions, connect the Python backend with the trained KNN pipeline.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="footer">
+    <div class="container flex-between">
+      <div>
+        <div class="footer-brand">⚕️ MediPredict</div>
+        <p class="footer-text">Multiple Disease Prediction System — MCA Academic Project</p>
+        <p class="footer-text">For educational and research purposes only. Not for clinical use.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Dashboard</a>
+        <a href="predict.html">Predict</a>
+        <a href="compare.html">Compare</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

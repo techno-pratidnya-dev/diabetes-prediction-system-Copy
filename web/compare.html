@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare machine learning models (Logistic Regression, Decision Tree, KNN, Random Forest) trained on the Pima Indians Diabetes Dataset.">
+  <title>Model Comparison — MediPredict</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Chart.js and Deferred Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/compare.js" defer></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container flex-between">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚕️</span>
+        <span>MediPredict</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="predict.html">Predict</a></li>
+        <li><a href="compare.html" class="active" aria-current="page">Compare</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Page Header -->
+    <header class="section page-header">
+      <div class="container text-center">
+        <span class="badge">Performance Analysis</span>
+        <h1>Model Comparison</h1>
+        <p>Compare the performance of four machine learning models trained on the Pima Indians Diabetes Dataset.</p>
+      </div>
+    </header>
+
+    <!-- Comparison Table Section -->
+    <section class="section table-section" aria-label="Model Performance Table">
+      <div class="container">
+        <div class="table-container" data-animate>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Algorithm Type</th>
+                <th>Accuracy</th>
+                <th>Recall</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Logistic Regression</td>
+                <td>Linear Model</td>
+                <td>70.78%</td>
+                <td>50.00%</td>
+                <td><span class="badge badge-primary">Trained</span></td>
+              </tr>
+              <tr>
+                <td>Decision Tree</td>
+                <td>Tree-Based</td>
+                <td>68.18%</td>
+                <td>48.15%</td>
+                <td><span class="badge badge-primary">Trained</span></td>
+              </tr>
+              <tr class="highlight-row">
+                <td>KNN <span class="badge badge-accent">Selected</span></td>
+                <td>Instance-Based</td>
+                <td>75.32%</td>
+                <td>61.11%</td>
+                <td><span class="badge badge-success">Best Recall ✓</span></td>
+              </tr>
+              <tr>
+                <td>Random Forest</td>
+                <td>Ensemble</td>
+                <td>76.62%</td>
+                <td>59.26%</td>
+                <td><span class="badge badge-primary">Trained</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Recall Matters Section -->
+    <section class="section recall-section" aria-label="Recall Metric Justification">
+      <div class="container">
+        <div class="info-box" data-animate>
+          <h3>🎯 Why We Chose KNN Based on Recall</h3>
+          <p>
+            In medical diagnosis, <strong>recall</strong> (sensitivity) measures how well the model identifies actual positive cases. A missed diabetes diagnosis (false negative) is more dangerous than a false alarm (false positive). KNN achieved the highest recall at <strong>61.11%</strong>, making it the best choice for minimizing missed diagnoses.
+          </p>
+          <p>
+            Note: Random Forest achieved higher accuracy (76.62%) but slightly lower recall (59.26%). The choice depends on whether you prioritize overall accuracy or catching all positive cases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="section charts-section" aria-labelledby="charts-heading">
+      <div class="container">
+        <h2 id="charts-heading" class="sr-only">Performance Comparison Charts</h2>
+        <div class="grid-2">
+          <div class="card chart-container" data-animate>
+            <h3>Model Accuracy Comparison</h3>
+            <canvas id="accuracy-chart" aria-label="Bar chart showing model accuracy comparison" role="img"></canvas>
+          </div>
+          <div class="card chart-container" data-animate>
+            <h3>Accuracy vs Recall</h3>
+            <canvas id="comparison-chart" aria-label="Grouped bar chart showing accuracy versus recall across models" role="img"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Insights Section -->
+    <section class="section insights-section" aria-labelledby="insights-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge">Key Insights</span>
+          <h2 id="insights-heading">Analytical Findings</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card insight-card" data-animate>
+            <h3>📊 Accuracy Analysis</h3>
+            <p>
+              Random Forest leads with 76.62% accuracy, followed by KNN at 75.32%. Decision Tree performed lowest at 68.18%. The ensemble approach of Random Forest helps reduce overfitting.
+            </p>
+          </div>
+          <div class="card insight-card" data-animate>
+            <h3>🎯 Recall Analysis</h3>
+            <p>
+              KNN achieves the highest recall at 61.11%, detecting more actual diabetes cases. For medical screening, this makes KNN the preferred choice as missing a positive case could delay critical treatment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="footer">
+    <div class="container flex-between">
+      <div>
+        <div class="footer-brand">⚕️ MediPredict</div>
+        <p class="footer-text">Multiple Disease Prediction System — MCA Academic Project</p>
+        <p class="footer-text">For educational and research purposes only. Not for clinical use.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Dashboard</a>
+        <a href="predict.html">Predict</a>
+        <a href="compare.html">Compare</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

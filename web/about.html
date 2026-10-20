@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about the Multiple Disease Prediction System, our dataset, ML pipeline, and technology stack.">
+  <title>About — MediPredict</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Deferred Scripts -->
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container flex-between">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚕️</span>
+        <span>MediPredict</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="predict.html">Predict</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Page Header -->
+    <header class="section page-header">
+      <div class="container text-center">
+        <span class="badge">About the Project</span>
+        <h1>Project Overview</h1>
+        <p>A comprehensive machine learning project for disease prediction, developed as part of MCA coursework.</p>
+      </div>
+    </header>
+
+    <!-- Project Description Section -->
+    <section class="section about-project-section" aria-label="About This Project">
+      <div class="container">
+        <div class="card" data-animate>
+          <h2>🎓 About This Project</h2>
+          <p>
+            The Multiple Disease Prediction System is an academic project that demonstrates the application of machine learning algorithms for healthcare risk assessment. Currently focused on diabetes prediction, the system uses the Pima Indians Diabetes Database and evaluates four different classification algorithms.
+          </p>
+          <p>
+            This project covers the complete ML pipeline: data loading, preprocessing, exploratory data analysis, model training, evaluation, comparison, and deployment as a web application.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dataset Information Section -->
+    <section class="section dataset-section" aria-label="Dataset Information">
+      <div class="container">
+        <div class="card" data-animate>
+          <h2>📋 Dataset Information</h2>
+          <p>
+            The Pima Indians Diabetes Database (originally from the National Institute of Diabetes and Digestive and Kidney Diseases) contains diagnostic measurements from 768 female patients of Pima Indian heritage, aged 21 and above.
+          </p>
+          
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Description</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pregnancies</strong></td>
+                  <td>Number of times pregnant</td>
+                  <td>count</td>
+                </tr>
+                <tr>
+                  <td><strong>Glucose</strong></td>
+                  <td>Plasma glucose concentration (2-hour OGTT)</td>
+                  <td>mg/dL</td>
+                </tr>
+                <tr>
+                  <td><strong>BloodPressure</strong></td>
+                  <td>Diastolic blood pressure</td>
+                  <td>mmHg</td>
+                </tr>
+                <tr>
+                  <td><strong>SkinThickness</strong></td>
+                  <td>Triceps skin fold thickness</td>
+                  <td>mm</td>
+                </tr>
+                <tr>
+                  <td><strong>Insulin</strong></td>
+                  <td>2-hour serum insulin</td>
+                  <td>µU/mL</td>
+                </tr>
+                <tr>
+                  <td><strong>BMI</strong></td>
+                  <td>Body mass index</td>
+                  <td>kg/m²</td>
+                </tr>
+                <tr>
+                  <td><strong>DiabetesPedigreeFunction</strong></td>
+                  <td>Genetic diabetes risk score</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>Age</strong></td>
+                  <td>Patient age</td>
+                  <td>years</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="margin-top: 16px;"><strong>Target:</strong> Outcome (0 = No Diabetes, 1 = Diabetes)</p>
+          <p><strong>Source:</strong> Kaggle — Pima Indians Diabetes Database</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ML Pipeline Section -->
+    <section class="section pipeline-section" aria-labelledby="pipeline-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge">Workflow</span>
+          <h2 id="pipeline-heading">Machine Learning Pipeline</h2>
+        </div>
+        <div class="grid-4">
+          <div class="card pipeline-card" data-animate>
+            <div class="pipeline-step-badge">Step 1</div>
+            <div class="feature-icon" aria-hidden="true">📥</div>
+            <h3>Data Loading</h3>
+            <p>Load the CSV dataset and perform initial inspection</p>
+          </div>
+          <div class="card pipeline-card" data-animate>
+            <div class="pipeline-step-badge">Step 2</div>
+            <div class="feature-icon" aria-hidden="true">🔧</div>
+            <h3>Preprocessing</h3>
+            <p>Handle missing values (median imputation) and scale features (StandardScaler)</p>
+          </div>
+          <div class="card pipeline-card" data-animate>
+            <div class="pipeline-step-badge">Step 3</div>
+            <div class="feature-icon" aria-hidden="true">🤖</div>
+            <h3>Model Training</h3>
+            <p>Train four ML models: Logistic Regression, Decision Tree, KNN, Random Forest</p>
+          </div>
+          <div class="card pipeline-card" data-animate>
+            <div class="pipeline-step-badge">Step 4</div>
+            <div class="feature-icon" aria-hidden="true">📊</div>
+            <h3>Evaluation</h3>
+            <p>Compare using accuracy and recall metrics, select best model</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="section tech-stack-section" aria-labelledby="tech-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge">Technologies</span>
+          <h2 id="tech-heading">Technology Stack</h2>
+        </div>
+        <div class="grid-4 tech-grid">
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">🐍</div>
+            <h3>Python</h3>
+            <p>Core programming language</p>
+          </div>
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">⚙️</div>
+            <h3>scikit-learn</h3>
+            <p>ML models and preprocessing</p>
+          </div>
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">🐼</div>
+            <h3>pandas</h3>
+            <p>Data analysis and manipulation</p>
+          </div>
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">🔢</div>
+            <h3>NumPy</h3>
+            <p>Numerical and matrix operations</p>
+          </div>
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">📊</div>
+            <h3>Chart.js</h3>
+            <p>Interactive data visualization</p>
+          </div>
+          <div class="card tech-card text-center" data-animate>
+            <div class="tech-icon">🌐</div>
+            <h3>HTML / CSS / JS</h3>
+            <p>Responsive modern dashboard</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Medical Disclaimer Section -->
+    <section class="section disclaimer-section" aria-label="Medical Disclaimer">
+      <div class="container">
+        <div class="disclaimer">
+          <h3>⚠️ Important Medical Disclaimer</h3>
+          <p>
+            This application is developed solely for <strong>educational and academic purposes</strong> as part of an MCA degree project. It is <strong>NOT a certified medical diagnostic tool</strong> and should <strong>NOT</strong> be used for actual medical decisions.
+          </p>
+          <p>
+            The predictions generated by this system are based on machine learning models trained on a limited dataset and may not be accurate or applicable to real-world clinical scenarios.
+          </p>
+          <p>
+            <strong>Always consult a qualified healthcare professional</strong> for any medical concerns, diagnoses, or treatment decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connecting to Backend Section -->
+    <section class="section backend-guide-section" aria-label="Backend Connection Instructions">
+      <div class="container">
+        <div class="info-box" data-animate>
+          <h3>🔗 Connecting to the Python Backend</h3>
+          <p>
+            This frontend is designed to work with a Flask/FastAPI backend that loads the trained KNN model.
+          </p>
+          <ol class="steps-list">
+            <li>Export your trained model from Colab using <code>joblib.dump()</code></li>
+            <li>Set up a Python Flask server with a <code>/predict</code> endpoint</li>
+            <li>Update <code>BACKEND_URL</code> in <code>js/predict.js</code> to point to your server</li>
+            <li>Run both the Flask server and open the web app</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="footer">
+    <div class="container flex-between">
+      <div>
+        <div class="footer-brand">⚕️ MediPredict</div>
+        <p class="footer-text">Multiple Disease Prediction System — MCA Academic Project</p>
+        <p class="footer-text">For educational and research purposes only. Not for clinical use.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Dashboard</a>
+        <a href="predict.html">Predict</a>
+        <a href="compare.html">Compare</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
